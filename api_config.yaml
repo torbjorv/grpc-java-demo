@@ -11,13 +11,13 @@ name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
 #
 title: MyApi java gRPC API
 apis:
-- name: endpoints.examples.myapi.MyService
+- name: mygrpcendpoint.MyService
 
 
 endpoints:
 - allow_cors: true
   name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
   apis:
-  - endpoints.examples.myapi.MyService
+  - mygrpcendpoint.MyService
     
 

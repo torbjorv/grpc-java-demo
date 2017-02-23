@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package endpoints.examples.myapi;
+package mygrpcendpoint;
 
 option java_outer_classname = "MyApiProto";
 option java_package = "com.slb.grpc.myapi";
