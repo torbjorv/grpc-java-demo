@@ -4,7 +4,7 @@ config_version: 3
 #
 # Name of the service configuration.
 #
-name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
+name: mygrpcendpoint.endpoints.MYPROJECTID.cloud.goog
 
 #
 # API title to appear in the user interface (Google Cloud Console).
@@ -16,7 +16,7 @@ apis:
 
 endpoints:
 - allow_cors: true
-  name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
+  name: mygrpcendpoint.endpoints.MYPROJECTID.cloud.goog
   apis:
   - mygrpcendpoint.MyService
     

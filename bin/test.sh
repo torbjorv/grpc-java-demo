@@ -2,12 +2,12 @@
 APIKEY=$1
 
 echo -n 'Waiting for public IP...'
-while kubectl get service | grep myapi-grpc-java-loadbalancer | grep -q pending
+while kubectl get service | grep mygrpcendpoint-loadbalancer | grep -q pending
 do
     echo -n '.'
     sleep 1
 done
-HOST=`kubectl get service | grep myapi-grpc-java-loadbalancer | awk '{print $3}'`
+HOST=`kubectl get service | grep mygrpcendpoint-loadbalancer | awk '{print $3}'`
 echo $HOST
 
 # Health check
