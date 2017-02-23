@@ -51,6 +51,9 @@
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
+        authorizations: {
+          "key": new SwaggerClient.ApiKeyAuthorization("key", "AIzaSyB2kkeRqhkW7QpLQN0v97jXWlfxwn1aMc0", "query")
+        },
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         onComplete: function(swaggerApi, swaggerUi){
