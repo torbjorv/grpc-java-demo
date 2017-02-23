@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapi-grpc-java-loadbalancer
+spec:
+  ports:
+  # Port that accepts gRPC and JSON/HTTP2 requests over HTTP.
+  - port: 8000
+    targetPort: 9000
+    protocol: TCP
+    name: http2
+  - port: 8001
+    targetPort: 9001
+    protocol: TCP
+    name: http1
+  selector:
+    app: myapi-grpc-java
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: myapi-grpc-java
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: myapi-grpc-java
+    spec:
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      containers:
+      # doc here: https://cloud.google.com/endpoints/docs/specify-proxy-startup-options
+      - name: esp
+        image: b.gcr.io/endpoints/endpoints-runtime:1.0
+        args: [
+          "-P", "9000",
+          "-p", "9001",
+          "-s", "myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog",
+          "-v", "apiversion", # will be substituded by the deploy script
+          "-a", "grpc://127.0.0.1:8000",
+          "-n", "/etc/nginx/custom/nginx.conf",
+        ]
+        ports:
+          - containerPort: 8000
+        volumeMounts:
+          - mountPath: /etc/nginx/custom
+            name: nginx-config
+            readOnly: true
+
+      - name: myapi-grpc-java
+        image: gcr.io/MYPROJECTID/myapi-grpc-java:latest
+        ports:
+          - containerPort: 8000
+
+      - name: myapi-grpc-swaggerui
+        image: gcr.io/MYPROJECTID/myapi-grpc-swaggerui:latest
+        ports:
+          - containerPort: 9002

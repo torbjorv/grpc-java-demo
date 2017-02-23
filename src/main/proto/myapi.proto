@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package endpoints.examples.myapi;
+
+option java_outer_classname = "MyApiProto";
+option java_package = "com.slb.grpc.myapi";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+service MyApi {
+    rpc Ping(google.protobuf.Empty) returns (HealthCheckResponse) {
+        option (google.api.http) = { get: "/v1/health" };
+    }
+}
+
+message HealthCheckResponse {
+    string status = 1;
+}

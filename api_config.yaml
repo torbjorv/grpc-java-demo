@@ -1,0 +1,23 @@
+type: google.api.Service
+config_version: 3
+
+#
+# Name of the service configuration.
+#
+name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
+
+#
+# API title to appear in the user interface (Google Cloud Console).
+#
+title: MyApi java gRPC API
+apis:
+- name: endpoints.examples.myapi.MyApi
+
+
+endpoints:
+- allow_cors: true
+  name: myapi-grpc-java.endpoints.MYPROJECTID.cloud.goog
+  apis:
+  - endpoints.examples.myapi.MyApi
+    
+
