@@ -7,14 +7,13 @@ import org.omg.PortableInterceptor.Interceptor;
 
 import java.util.concurrent.TimeUnit;
 
-public class MyApiClient {
+public class MyClient {
 
     public static void main(String[] args) throws Exception {
 
-
         Channel channel = getChannel(args);
 
-        MyApiGrpc.MyApiBlockingStub blockingStub = MyApiGrpc.newBlockingStub(channel);
+        MyServiceGrpc.MyServiceBlockingStub blockingStub = MyServiceGrpc.newBlockingStub(channel);
         blockingStub.ping(Empty.getDefaultInstance());
     }
 
