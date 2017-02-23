@@ -9,15 +9,8 @@ name: mygrpcendpoint.endpoints.MYPROJECTID.cloud.goog
 #
 # API title to appear in the user interface (Google Cloud Console).
 #
-title: MyApi java gRPC API
+title: My GRPC endpoint
 apis:
 - name: mygrpcendpoint.MyService
-
-
-endpoints:
-- allow_cors: true
-  name: mygrpcendpoint.endpoints.MYPROJECTID.cloud.goog
-  apis:
-  - mygrpcendpoint.MyService
     
 
