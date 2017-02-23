@@ -18,7 +18,7 @@ max_tries=10
 while [ $unhealthy -ne 0 ]
 do
     echo -n '.'
-    java -cp target/myapi-1.0.0-jar-with-dependencies.jar com.slb.grpc.myapi.MyApiClient --host $HOST --port 8000 --key $APIKEY> /dev/null 2>&1
+    java -cp target/myapi-1.0.0-jar-with-dependencies.jar com.slb.grpc.myapi.MyClient --host $HOST --port 8000 --key $APIKEY> /dev/null 2>&1
     unhealthy=$?
     
     tries=$((tries + 1))
