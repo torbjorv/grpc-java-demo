@@ -9,9 +9,23 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
 service MyService {
+
+    rpc ListFish(FishyRequest) returns (FishyResponse) {
+        option (google.api.http) = { get: "/v1/fish/{ocean}" };
+    }
+
     rpc Ping(google.protobuf.Empty) returns (HealthCheckResponse) {
         option (google.api.http) = { get: "/v1/health" };
     }
+}
+
+message FishyRequest {
+    string ocean = 1;
+    bool good_for_sushi = 2;
+}
+
+message FishyResponse {
+    repeated string fish_names = 1;
 }
 
 message HealthCheckResponse {
