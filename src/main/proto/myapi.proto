@@ -10,24 +10,19 @@ import "google/api/annotations.proto";
 
 service MyService {
 
-    rpc ListFish(FishyRequest) returns (FishyResponse) {
-        option (google.api.http) = { get: "/v1/fish/{ocean}" };
+    rpc GetPayload(PayloadRequest) returns (PayloadResponse) {
+        option (google.api.http) = { get: "/v1/payload/{size}" };
     }
 
-    rpc Ping(google.protobuf.Empty) returns (HealthCheckResponse) {
-        option (google.api.http) = { get: "/v1/health" };
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty) {
+        option (google.api.http) = { get: "/v1/ping" };
     }
 }
 
-message FishyRequest {
-    string ocean = 1;
-    bool good_for_sushi = 2;
+message PayloadRequest {
+    int32 size = 1;
 }
 
-message FishyResponse {
-    repeated string fish_names = 1;
-}
-
-message HealthCheckResponse {
-    string status = 1;
+message PayloadResponse {
+    bytes payload = 1;
 }

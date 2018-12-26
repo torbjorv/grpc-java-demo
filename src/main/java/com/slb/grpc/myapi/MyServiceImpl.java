@@ -1,31 +1,40 @@
 package com.slb.grpc.myapi;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
+
+import java.util.Map;
 
 
 public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
-    @Override
-    public void ping(Empty request, StreamObserver<MyApiProto.HealthCheckResponse> responseObserver) {
-        MyApiProto.HealthCheckResponse response = MyApiProto.HealthCheckResponse
-                .newBuilder()
-                .setStatus("ok")
-                .build();
+    Map<Integer, MyApiProto.PayloadResponse> cache = Maps.newHashMap();
 
-        responseObserver.onNext(response);
+    @Override
+    public void ping(Empty request, StreamObserver<Empty> responseObserver) {
+        responseObserver.onNext(Empty.getDefaultInstance());
         responseObserver.onCompleted();
     }
 
     @Override
-    public void listFish(MyApiProto.FishyRequest request, StreamObserver<MyApiProto.FishyResponse> responseObserver) {
+    public void getPayload(MyApiProto.PayloadRequest request, StreamObserver<MyApiProto.PayloadResponse> responseObserver) {
 
-        MyApiProto.FishyResponse response = MyApiProto.FishyResponse.newBuilder()
-                .addAllFishNames(Lists.newArrayList("cod", "shark", "moby dick"))
-                .build();
+        if (!cache.containsKey(request.getSize())) {
+            byte[] payload = new byte[request.getSize()];
+            for (int i = 0; i < request.getSize(); i++)
+                payload[i] = (byte)i;
 
-        responseObserver.onNext(response);
+            MyApiProto.PayloadResponse response = MyApiProto.PayloadResponse.newBuilder()
+                    .setPayload(ByteString.copyFrom(payload))
+                    .build();
+
+            cache.put(request.getSize(), response);
+        }
+
+        responseObserver.onNext(cache.get(request.getSize()));
         responseObserver.onCompleted();
     }
 }
