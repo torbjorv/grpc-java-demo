@@ -3,7 +3,7 @@ syntax = "proto3";
 package mygrpcendpoint;
 
 option java_outer_classname = "MyApiProto";
-option java_package = "com.slb.grpc.myapi";
+option java_package = "torbjorv.grpc.myapi";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";

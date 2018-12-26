@@ -1,12 +1,13 @@
-package com.slb.grpc.myapi;
+package torbjorv.grpc;
 
 import com.google.common.base.Stopwatch;
 import com.google.protobuf.Empty;
 import io.grpc.*;
 import io.grpc.stub.MetadataUtils;
 import org.apache.commons.cli.*;
+import torbjorv.grpc.myapi.MyApiProto;
+import torbjorv.grpc.myapi.MyServiceGrpc;
 
-import java.nio.ByteBuffer;
 import java.time.Duration;
 
 public class MyClient {
@@ -45,7 +46,7 @@ public class MyClient {
 
         Stopwatch stopwatch = Stopwatch.createStarted();
         if (payload == 0) {
-            System.out.println("0 byte payload, using method 'ping'.");
+            System.out.println("0-byte payload, using method 'ping'.");
             Empty request = Empty.getDefaultInstance();
             for (int i = 1; i <= requestCount; i++) {
                 blockingStub.ping(request);

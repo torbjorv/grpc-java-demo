@@ -1,4 +1,4 @@
-package com.slb.grpc.myapi;
+package torbjorv.grpc;
 
 import io.grpc.ServerBuilder;
 

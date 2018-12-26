@@ -1,10 +1,11 @@
-package com.slb.grpc.myapi;
+package torbjorv.grpc;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
+import torbjorv.grpc.myapi.MyApiProto;
+import torbjorv.grpc.myapi.MyServiceGrpc;
 
 import java.util.Map;
 
